@@ -1,14 +1,15 @@
 pipeline {
     agent any
-    environment {
-        JAVA_HOME '/var/jenkins_home/tools/hudson.model.JDK/JAVA11'
-    }
     
     tools {
         jdk 'JAVA11'
         maven 'Maven392'
     }
     
+    environment {
+        JAVA_HOME='${jdk}'
+    }
+
     stages {
             stage('Which Java?') {
                 steps {
@@ -16,7 +17,7 @@ pipeline {
                 }
             }
             stage ('Build') {
-                steps {                   
+                steps {              
                     sh "mvn clean verify"                    
                 }
             }
